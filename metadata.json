@@ -1,0 +1,81 @@
+{
+  "name": "randell-p9_instance_setup",
+  "version": "0.1.0",
+  "author": "Randell",
+  "summary": "",
+  "license": "Apache-2.0",
+  "source": "",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib"
+    },
+    {
+      "name": "saz-sudo"
+    },
+    {
+      "name": "xanloy-tmux"
+    },
+    {
+      "name": "rehan-git"
+    },
+    {
+      "name": "jdowning-rbenv"
+    },
+    {
+      "name": "puppetlabs-java"
+    },
+    {
+      "name": "puppet-ohmyzsh"
+    },
+    {
+      "name": "puppetlabs-vcsrepo"
+    },
+    {
+      "name": "rehan-wget"
+    },
+    {
+      "name": "puppet-nginx"
+    },
+    {
+      "name": "abuxton-pdk"
+    },
+    {
+      "name": "puppet-archive"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.10.0 < 7.0.0"
+    }
+  ],
+  "pdk-version": "1.8.0",
+  "template-url": "file:///opt/puppetlabs/pdk/share/cache/pdk-templates.git",
+  "template-ref": "1.8.0-0-g0d9da00"
+}
