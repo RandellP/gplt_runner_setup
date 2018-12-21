@@ -9,6 +9,12 @@ class p9_instance_setup (
   Boolean $set_zsh = true,
   ) {
 
+  include ntp
+
+  class { 'timezone':
+    timezone => 'America/Los_Angeles',
+  }
+
   user { $test_user:
     ensure           => "present",
     home             => "/home/$test_user",
@@ -32,24 +38,6 @@ class p9_instance_setup (
     source  => "/home/centos/.ssh/authorized_keys",
     replace => true,
   }
-
-#  if $copy_fog {
-#    file { "fog":
-#      path   => "/home/$test_user/.fog",
-#      owner  => $test_user,
-#      group  => $test_user,
-#      source => "/home/centos/.fog",
-#    }
-#  }
-#  
-#  if $copy_tmux_conf {
-#    file { "tmux_conf":
-#      path   => "/home/$test_user/.tmux.conf",
-#      owner  => $test_user,
-#      group  => $test_user,
-#      source => "/home/centos/.tmux.conf",
-#    }
-#  }
 
   class { "sudo": }
   sudo::conf { "centos":
@@ -77,8 +65,10 @@ class p9_instance_setup (
   }
 
   if $set_zsh {
-    ohmyzsh::install { $test_user: set_sh => true }
-    ohmyzsh::plugins { $test_user: plugins => ['git', 'history', 'vi-mode'] }
+    p9_instance_setup::set_zsh { "$test_user zsh":
+      test_user => "$test_user",
+      require => User[$test_user],
+    }
   }
 
   include nginx
