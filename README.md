@@ -49,3 +49,16 @@ bolt plan run p9_instance_setup::setup_instance --nodes <node> --run-as root --t
 bolt plan run p9_instance_setup::setup_instance --nodes <node> --run-as root --tty --user centos --private-key <access key
 > instance_username=JoeBoo
 ```
+
+## Current Issue
+
+As of this update, the module rehan-ohmyzsh is version 2.1.0. And has a bug with the .zshrc plugins section.  It should look like this
+```
+plugins=(
+  git history vi-mode
+)
+```
+
+But ends up wonky.  I think the default .zshrc that comes with the package had a change that caused the regexp to do the wrong thing.  I put up a PR to fix it, but it hasn't been seen yet.  However fixing the rc file manually is pretty easy.
+But you could also use my fork if you like... https://github.com/RandellP/puppet-ohmyzsh
+
