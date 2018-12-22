@@ -17,3 +17,5 @@ fixtures:
      pdk: "abuxton-pdk"
      archive: "puppet-archive"
      yumrepo_code: "puppetlabs/yumrepo_core"
+     ntp: "puppetlabs-ntp"
+     timezone: "saz-timezone"

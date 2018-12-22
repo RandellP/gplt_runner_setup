@@ -21,16 +21,7 @@ plan p9_instance_setup::setup_instance (
   apply($nodes) {
     class { 'p9_instance_setup':
       test_user => $instance_username,
-      set_zsh => false,
-    }
-  }
-
-  #currently has to be run seperately...
-  #if run at the same time, errs about failing to set user shell because zsh isn't installed yet...
-  #which it shouldn't be trying to set in the first place since zsh "requires" the user already be created
-  apply($nodes) {
-    class { 'p9_instance_setup::set_zsh':
-      test_user => $instance_username,
+      set_zsh => true,
     }
   }
 

@@ -22,7 +22,8 @@ class p9_instance_setup (
     password_max_age => "99999",
     password_min_age => "0",
     shell            => "/bin/bash",
-    managehome       => true
+    managehome       => true,
+    require          => Package['zsh'],
   }
 
   file { "$test_user ssh":
@@ -65,10 +66,10 @@ class p9_instance_setup (
   }
 
   if $set_zsh {
-    p9_instance_setup::set_zsh { "$test_user zsh":
-      test_user => "$test_user",
-      require => User[$test_user],
+    ohmyzsh::install { $test_user:
+      set_sh => true,
     }
+    ohmyzsh::plugins { $test_user: plugins => ['git', 'history', 'vi-mode'] }
   }
 
   include nginx

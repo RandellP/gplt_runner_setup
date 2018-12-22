@@ -7,40 +7,60 @@
   "source": "",
   "dependencies": [
     {
-      "name": "puppetlabs-stdlib"
+      "name": "saz-sudo",
+      "version_requirement": ">= 5.0.0 < 6.0.0"
     },
     {
-      "name": "saz-sudo"
+      "name": "xanloy-tmux",
+      "version_requirement": ">= 1.0.2 < 2.0.0"
     },
     {
-      "name": "xanloy-tmux"
+      "name": "rehan-git",
+      "version_requirement": ">= 1.2.0 < 2.0.0"
     },
     {
-      "name": "rehan-git"
+      "name": "jdowning-rbenv",
+      "version_requirement": ">= 2.4.0 < 3.0.0"
     },
     {
-      "name": "jdowning-rbenv"
+      "name": "puppetlabs-java",
+      "version_requirement": ">= 3.2.0 < 4.0.0"
     },
     {
-      "name": "puppetlabs-java"
+      "name": "puppet-ohmyzsh",
+      "version_requirement": ">= 2.1.0 < 3.0.0"
     },
     {
-      "name": "puppet-ohmyzsh"
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 4.0.0 < 6.0.0"
     },
     {
-      "name": "puppetlabs-vcsrepo"
+      "name": "puppetlabs-vcsrepo",
+      "version_requirement": ">= 2.0.0 < 4.0.0"
     },
     {
-      "name": "rehan-wget"
+      "name": "rehan-wget",
+      "version_requirement": ">= 1.0.0 < 2.0.0"
     },
     {
-      "name": "puppet-nginx"
+      "name": "puppet-nginx",
+      "version_requirement": ">= 0.15.0 < 1.0.0"
     },
     {
-      "name": "abuxton-pdk"
+      "name": "abuxton-pdk",
+      "version_requirement": ">= 0.2.0 < 1.0.0"
     },
     {
-      "name": "puppet-archive"
+      "name": "puppet-archive",
+      "version_requirement": ">= 3.2.1 < 4.0.0"
+    },
+    {
+      "name": "puppet-ntp",
+      "version_requirement": ">= 7.3.0 < 8.0.0"
+    },
+    {
+      "name": "saz-timezone",
+      "version_requirement": ">= 5.0.2 < 6.0.0"
     }
   ],
   "operatingsystem_support": [
