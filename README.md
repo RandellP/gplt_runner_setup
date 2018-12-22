@@ -1,9 +1,5 @@
 
-# p9_instance_setup
-
-Welcome to your new module. A short overview of the generated parts can be found in the PDK documentation at https://puppet.com/pdk/latest/pdk_generating_modules.html .
-
-The README template below provides a starting point with details about what information to include in your README.
+# RandellP-p9_instance_setup
 
 #### Table of Contents
 
@@ -12,8 +8,6 @@ The README template below provides a starting point with details about what info
     * [What p9_instance_setup affects](#what-p9_instance_setup-affects)
     * [Beginning with p9_instance_setup](#beginning-with-p9_instance_setup)
 3. [Usage - Configuration options and additional functionality](#usage)
-4. [Limitations - OS compatibility, etc.](#limitations)
-5. [Development - Guide for contributing to the module](#development)
 
 ## Description
 
@@ -21,15 +15,15 @@ This module can configure a platform9 instance with the needed software to be ab
 
 ## Setup
 
-### What p9_instance_setup affects **OPTIONAL**
+### What p9_instance_setup affects
 
 By default this will set the new users shell to zsh
 
 ### Beginning with p9_instance_setup
 
-In order to install `rehan-ohmyzsh`, run the following command:
+In order to install `RandellP-p9_instance_setup`, run the following command:
 ```bash
-$ puppet module install rehan-ohmyzsh
+$ puppet module install RandellP-p9_instance_setup
 ```
 ## Usage
 
@@ -38,7 +32,7 @@ As a module it will not copy config files, just install the needed software pack
 
 ```puppet
 # As a module with default user of tester that will use zsh
-inclde p9_instance_setup
+include p9_instance_setup
 
 # As module with user JoeBoo using bash
 class { 'p9_instance_setup':
@@ -46,7 +40,7 @@ class { 'p9_instance_setup':
   set_zsh => false,
 }
 
-# It contains a bolt plan that allows use on p9 instances that are not agents
+# It contains a bolt plan that can target a platform9 instance that is not an agent
 
 # To run the plan with defaults
 bolt plan run p9_instance_setup::setup_instance --nodes <node> --run-as root --tty --user centos --private-key <access key>
