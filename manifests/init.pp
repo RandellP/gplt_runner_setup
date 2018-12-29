@@ -66,10 +66,11 @@ class p9_instance_setup (
   }
 
   if $set_zsh {
-    ohmyzsh::install { $test_user:
+    ohmyzsh::install { ["$test_user", "centos"]:
       set_sh => true,
     }
     ohmyzsh::plugins { $test_user: plugins => ['git', 'history', 'vi-mode'] }
+    ohmyzsh::plugins { centos: plugins => ['git', 'history', 'vi-mode'] }
   }
 
   include nginx
