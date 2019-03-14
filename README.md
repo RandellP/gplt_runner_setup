@@ -50,15 +50,10 @@ bolt plan run p9_instance_setup::setup_instance --nodes <node> --run-as root --t
 > instance_username=JoeBoo
 ```
 
-## Current Issue
+## Current Oddness
 
-As of this update, the module rehan-ohmyzsh is version 2.1.0. And has a bug with the .zshrc plugins section.  It should look like this
-```
-plugins=(
-  git history vi-mode
-)
-```
+First, I have never tested using this any way other than as the bolt plan.  So YMMV.
 
-But ends up wonky.  I think the default .zshrc that comes with the package had a change that caused the regexp to do the wrong thing.  I put up a PR to fix it, but it hasn't been seen yet.  However fixing the rc file manually is pretty easy.
-But you could also use my fork if you like... https://github.com/RandellP/puppet-ohmyzsh
+The bolt plan does some funny stuff... I applys the code in subsets. That is because when I tried doing it all at once the ohmyzsh module had trouble setting the shell on a user that was created in the same code.  So I did the code that created the user in one bolt apply, then did the ohmyzsh in another.  The dashboard stuff was split out because at one point I had to run it twice to get it to work.  But that got fixed, so it could really be merged back to core at some future point. 
+
 
