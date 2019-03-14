@@ -1,7 +1,7 @@
 plan p9_instance_setup::setup_instance (
      TargetSpec $nodes,
      String $instance_username = "tester",
-     Boolean $set_zsh = true,
+     Boolean $set_zsh = false,
    ) {
 
 
@@ -19,18 +19,10 @@ plan p9_instance_setup::setup_instance (
   $nodes.apply_prep
 
   # Compile the manifest block into a catalog
-  apply($nodes) {
-    class { 'p9_instance_setup::core':
+  apply($nodes,_catch_errors => true) {
+    class { 'p9_instance_setup':
       test_user => $instance_username,
-    }
-    include p9_instance_setup::dashboard
-  }
-
-  if $set_zsh {
-    apply($nodes) {
-      class { 'p9_instance_setup::ohmyzsh':
-        test_user => $instance_username,
-      }
+      set_zsh => $set_zsh,
     }
   }
 
