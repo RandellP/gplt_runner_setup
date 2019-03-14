@@ -52,8 +52,7 @@ bolt plan run p9_instance_setup::setup_instance --nodes <node> --run-as root --t
 
 ## Current Oddness
 
-First, I have never tested using this any way other than as the bolt plan.  So YMMV.
+First, I have never tested using this in any way other than with the bolt plan.  So YMMV classifing a node this way.
 
-The bolt plan does some funny stuff... I applys the code in subsets. That is because when I tried doing it all at once the ohmyzsh module had trouble setting the shell on a user that was created in the same code.  So I did the code that created the user in one bolt apply, then did the ohmyzsh in another.  The dashboard stuff was split out because at one point I had to run it twice to get it to work.  But that got fixed, so it could really be merged back to core at some future point. 
-
+The bolt plan does some funny stuff... It applys the code in subsets. That is because when I tried doing it all at once the ohmyzsh module had trouble setting the shell on a user that was created in the same code.  So I did the code that created the user in one bolt apply, then did the ohmyzsh in another.  The dashboard stuff was split out because at one point I had to run it twice to get it to work.  But that got fixed, so it could really be merged back to the core at some future point. 
 
