@@ -11,7 +11,7 @@ class p9_instance_setup::core (
   include ntp
 
   class { selinux:
-    mode => 'disabled',
+    mode => 'permissive',
     module_build_root => '/opt/puppetlabs/puppet/cache',
   }
 
