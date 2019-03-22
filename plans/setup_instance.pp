@@ -1,13 +1,13 @@
 plan p9_instance_setup::setup_instance (
      TargetSpec $nodes,
-     String $instance_username = "default",
+     String $instance_username = "testrunner",
      Boolean $set_zsh = true,
    ) {
 
 
   $result_whoami = run_command('whoami',"localhost",'_catch_errors' => true)
   $running_user = $result_whoami.first.value[stdout].strip
-  if $instance_username == "default" {
+  if $instance_username == "testrunner" {
     $username = $running_user
   } else {
     $username = $instance_username
