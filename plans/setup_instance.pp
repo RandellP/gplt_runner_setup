@@ -1,13 +1,19 @@
 plan p9_instance_setup::setup_instance (
      TargetSpec $nodes,
-     String $instance_username = "tester",
+     String $instance_username = "default",
      Boolean $set_zsh = true,
    ) {
 
 
   $result_whoami = run_command('whoami',"localhost",'_catch_errors' => true)
   $running_user = $result_whoami.first.value[stdout].strip
-#  notice("Using running bolt is $running_user")
+  if $instance_username == "default" {
+    $username = $running_user
+  } else {
+    $username = $instance_username
+  }
+  notice("User running bolt is $running_user")
+  notice("Username will be $username")
 
   $result_pwd = run_command('echo $HOME',"localhost",'_catch_errors' => true)
   $home_dir = $result_pwd.first.value[stdout].strip
@@ -21,7 +27,7 @@ plan p9_instance_setup::setup_instance (
   # Compile the manifest block into a catalog
   apply($nodes) {
     class { 'p9_instance_setup::core':
-      test_user => $instance_username,
+      test_user => $username,
     }
     include p9_instance_setup::dashboard
   }
@@ -29,15 +35,15 @@ plan p9_instance_setup::setup_instance (
   if $set_zsh {
     apply($nodes) {
       class { 'p9_instance_setup::ohmyzsh':
-        test_user => $instance_username,
+        test_user => $username,
       }
     }
   }
 
   upload_file("$home_dir/.fog","/home/centos/.fog",$nodes)
-  upload_file("$home_dir/.fog","/home/$instance_username/.fog",$nodes)
+  upload_file("$home_dir/.fog","/home/$username/.fog",$nodes)
   upload_file("$home_dir/.tmux.conf","/home/centos/.tmux.conf",$nodes)
-  upload_file("$home_dir/.tmux.conf","/home/$instance_username/.tmux.conf",$nodes)
+  upload_file("$home_dir/.tmux.conf","/home/$username/.tmux.conf",$nodes)
   run_command("rm -rf /home/centos/ssh_temp",$nodes)
   upload_file("$home_dir/.ssh","/home/centos/ssh_temp",$nodes)
 
@@ -51,7 +57,7 @@ plan p9_instance_setup::setup_instance (
   }
 
   run_command("cp /home/centos/ssh_temp/* /home/centos/.ssh/",$nodes)
-  run_command("cp -p /home/centos/ssh_temp/* /home/$instance_username/.ssh/",$nodes)
+  run_command("cp -p /home/centos/ssh_temp/* /home/$username/.ssh/",$nodes)
 
   apply($nodes) {
     file { 'centos fog':
@@ -71,23 +77,23 @@ plan p9_instance_setup::setup_instance (
       recurse => true,
     }
     file { 'user fog':
-      path  => "/home/$instance_username/.fog",
-      owner => "$instance_username",
-      group => "$instance_username",
+      path  => "/home/$username/.fog",
+      owner => "$username",
+      group => "$username",
     }
     file { 'user tmux.conf':
-      path  => "/home/$instance_username/.tmux.conf",
-      owner => "$instance_username",
-      group => "$instance_username",
+      path  => "/home/$username/.tmux.conf",
+      owner => "$username",
+      group => "$username",
     }
     file { 'user ssh':
-      path  => "/home/$instance_username/.ssh",
-      owner => "$instance_username",
-      group => "$instance_username",
+      path  => "/home/$username/.ssh",
+      owner => "$username",
+      group => "$username",
       recurse => true,
     }
   }
 
-  run_task('p9_instance_setup::setup_metrics_viewer', $nodes, instance_username=> $instance_username)
+  run_task('p9_instance_setup::setup_metrics_viewer', $nodes, instance_username=> $username)
 
 }
