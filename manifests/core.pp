@@ -10,6 +10,10 @@ class p9_instance_setup::core (
 
   include ntp
 
+  class { selinux:
+    mode => 'disabled',
+  }
+
   class { 'timezone':
     timezone => 'America/Los_Angeles',
   }
