@@ -68,8 +68,6 @@ class p9_instance_setup::core (
     ensure => true,
   }
   
-  include git
-
   class { 'rbenv': }
   rbenv::plugin { [ 'rbenv/rbenv-vars', 'rbenv/ruby-build' ]: }
   rbenv::build { '2.3.0': global => true }
