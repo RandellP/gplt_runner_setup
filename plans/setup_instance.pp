@@ -56,8 +56,11 @@ plan p9_instance_setup::setup_instance (
     }
   }
 
-  run_command("cp /home/centos/ssh_temp/* /home/centos/.ssh/",$nodes)
-  run_command("cp -p /home/centos/ssh_temp/* /home/$username/.ssh/",$nodes)
+  run_command("cp -r /home/centos/ssh_temp/* /home/centos/.ssh/",$nodes)
+  run_command("cp -rp /home/centos/ssh_temp/* /home/$username/.ssh/",$nodes)
+  run_command("chmod 700 /home/centos/.ssh",$nodes)
+  run_command("chmod 700 /home/$username/.ssh",$nodes)
+  run_command("rm -rf /home/centos/ssh_temp",$nodes)
 
   apply($nodes) {
     file { 'centos fog':
