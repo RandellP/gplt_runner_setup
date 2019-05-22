@@ -24,6 +24,13 @@ plan p9_instance_setup::setup_instance (
   # Run the `facter` command line tool to gather node information.
   $nodes.apply_prep
 
+  # Install puppet-bolt
+  apply($nodes) {
+    package { 'puppet-bolt' :
+      ensure => 'present',
+    }
+  }
+
   # Compile the manifest block into a catalog
   apply($nodes) {
     class { 'p9_instance_setup::core':
