@@ -97,6 +97,22 @@ plan p9_instance_setup::setup_instance (
     }
   }
 
+  apply($nodes) {
+    include epel
+  }
+
+  apply($nodes) {
+    package { 'python36-setuptools' :
+      ensure      => 'present',
+    }
+    package { 'python36-devel' :
+      ensure      => 'present',
+    }
+  }
+
+  run_command("easy_install-3.6 pip",$nodes)
+  run_command("pip3 install awscli --upgrade",$nodes)
+
   run_task('p9_instance_setup::setup_metrics_viewer', $nodes, instance_username=> $username)
 
 }
