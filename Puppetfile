@@ -1,5 +1,3 @@
-mod 'p9_instance_setup',
-    :git => 'https://github.com/RandellP/p9_instance_setup'
 mod 'abuxton-pdk'
 mod 'chocolatey-chocolatey'
 mod 'crayfishx-firewalld'
