@@ -4,17 +4,17 @@
 #   instance_username - name of user to setup
 #
 # examples:
-#   run_plan(p9_instance_setup::upload_user_files,"nodes" => $nodes, instance_username => $username)
+#   run_plan(gplt_runner_setup::upload_user_files,"nodes" => $nodes, instance_username => $username)
 #
-#   bolt plan run p9_instance_setup::upload_user_files --nodes 10.234.0.19 --user centos
+#   bolt plan run gplt_runner_setup::upload_user_files --nodes 10.234.0.19 --user centos
 #     --private-key ~/.ssh/id_rsa-acceptance --no-host-key-check --tty --run-as root instance_username=betty
 #
-plan p9_instance_setup::upload_user_files (
+plan gplt_runner_setup::upload_user_files (
     TargetSpec $nodes,
     String $instance_username = "",
   ) {
 
-  $username = run_plan(p9_instance_setup::determine_username,"nodes" => "localhost",
+  $username = run_plan(gplt_runner_setup::determine_username,"nodes" => "localhost",
     instance_username => $instance_username)
   notice("Username will be ${username}")
 
@@ -27,7 +27,7 @@ plan p9_instance_setup::upload_user_files (
   $user_configs.each |String $config| {
     $src = "${home_dir}/${config}"
     $dest = "/home/${username}/${config}"
-    if p9_instance_setup::readable($src) {
+    if gplt_runner_setup::readable($src) {
       upload_file($src, $dest, $nodes, "_run_as" => $username)
     }
   }

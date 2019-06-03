@@ -3,8 +3,8 @@
 # @summary Install and configure the puppet metrics dashboard
 #
 # @example
-#   include p9_instance_setup::dashboard
-class p9_instance_setup::dashboard {
+#   include gplt_runner_setup::dashboard
+class gplt_runner_setup::dashboard {
 
   class { "puppet_metrics_dashboard":
     add_dashboard_examples => true,

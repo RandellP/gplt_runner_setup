@@ -3,8 +3,8 @@
 # @summary Install and set the users shell to zsh
 #
 # @example
-#   include p9_instance_setup::ohmyzsh
-class p9_instance_setup::ohmyzsh (
+#   include gplt_runner_setup::ohmyzsh
+class gplt_runner_setup::ohmyzsh (
   String $test_user = "tester",
   ) {
 

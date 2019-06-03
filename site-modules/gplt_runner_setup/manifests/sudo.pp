@@ -3,8 +3,8 @@
 # @summary Configure sudo module and centos privlidges
 #
 # @example
-#   include p9_instance_setup::core
-class p9_instance_setup::sudo (
+#   include gplt_runner_setup::core
+class gplt_runner_setup::sudo (
   ) {
 
   class { "sudo":

@@ -1,6 +1,6 @@
 # Applies all the software based manifests that are used in all cases
 #
-plan p9_instance_setup::manage_software (
+plan gplt_runner_setup::manage_software (
     TargetSpec $nodes,
   ) {
 
@@ -11,7 +11,7 @@ plan p9_instance_setup::manage_software (
 
   # Compile the manifest block into a catalog
   apply($nodes) {
-    include p9_instance_setup::core
-    include p9_instance_setup::dashboard
+    include gplt_runner_setup::core
+    include gplt_runner_setup::dashboard
   }
 }

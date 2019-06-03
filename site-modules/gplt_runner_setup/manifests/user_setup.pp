@@ -4,8 +4,8 @@
 # @summary Create and configure user
 #
 # @example
-#   include p9_instance_setup::user_setup
-class p9_instance_setup::user_setup (
+#   include gplt_runner_setup::user_setup
+class gplt_runner_setup::user_setup (
   String $test_user = "tester",
   ) {
 
@@ -51,7 +51,7 @@ class p9_instance_setup::user_setup (
     group  => $test_user,
   }
 
-  include p9_instance_setup::sudo
+  include gplt_runner_setup::sudo
   sudo::conf { $test_user:
     priority => 80,
     content  => "${test_user} ALL=(ALL) NOPASSWD: ALL",
