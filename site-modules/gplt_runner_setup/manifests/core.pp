@@ -46,7 +46,22 @@ class gplt_runner_setup::core (
     package => "java-1.8.0-openjdk-devel",
   }
 
-  include nginx
+  class { "nginx":
+    manage_repo    => true,
+    package_source => "nginx-stable",
+    confd_only     => true,
+  }
+
+  nginx::resource::server{ "default":
+    www_root => "/usr/share/nginx/html/users",
+    autoindex => "on",
+  }
+
+  file { "html users":
+    ensure => "directory",
+    path   => "/usr/share/nginx/html/users",
+    mode   => "755",
+  }
 
   include pdk
 
