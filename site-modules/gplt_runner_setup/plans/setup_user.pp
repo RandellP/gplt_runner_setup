@@ -6,20 +6,20 @@
 #   upload_user_files - if true attempts to upload user configuration files
 #
 # examples:
-#   run_plan(p9_instance_setup::setup_user,"nodes" => $nodes, "instance_username" => $username, "set_zsh" => $set_zsh,
+#   run_plan(gplt_runner_setup::setup_user,"nodes" => $nodes, "instance_username" => $username, "set_zsh" => $set_zsh,
 #     "upload_user_files" => $upload_user_files)
 #
-#   bolt plan run p9_instance_setup::setup_user --nodes 10.234.0.19 --user centos 
+#   bolt plan run gplt_runner_setup::setup_user --nodes 10.234.0.19 --user centos
 #     --private-key ~/.ssh/id_rsa-acceptance --no-host-key-check --tty --run-as root instance_username=betty
 #
-plan p9_instance_setup::setup_user (
+plan gplt_runner_setup::setup_user (
     TargetSpec $nodes,
     String $instance_username = "",
     Boolean $set_zsh = true,
     Boolean $upload_user_files = true,
   ) {
 
-  $username = run_plan(p9_instance_setup::determine_username,"nodes" => "localhost",
+  $username = run_plan(gplt_runner_setup::determine_username,"nodes" => "localhost",
     instance_username => $instance_username)
   notice("Username will be ${username}")
 
@@ -32,26 +32,26 @@ plan p9_instance_setup::setup_user (
   $nodes.apply_prep
 
   apply($nodes) {
-    class { "p9_instance_setup::user_setup":
+    class { "gplt_runner_setup::user_setup":
       test_user => $username,
     }
   }
 
   if $set_zsh {
     apply($nodes) {
-      class { "p9_instance_setup::ohmyzsh":
+      class { "gplt_runner_setup::ohmyzsh":
         test_user => $username,
       }
     }
   }
 
-  run_plan(p9_instance_setup::upload_auth_files,"nodes" => $nodes, instance_username => $username)
+  run_plan(gplt_runner_setup::upload_auth_files,"nodes" => $nodes, instance_username => $username)
   if $upload_user_files {
-    run_plan(p9_instance_setup::upload_user_files,"nodes" => $nodes, instance_username => $username)
+    run_plan(gplt_runner_setup::upload_user_files,"nodes" => $nodes, instance_username => $username)
   }
 
   #do not try to use _run_as => $username...  For some reason it claims it works but doesn't.
   #the tasks chown and chgrp anyway
-  run_task("p9_instance_setup::setup_metrics_viewer", $nodes, instance_username => $username)
-  run_task("p9_instance_setup::setup_gatling", $nodes, instance_username => $username)
+  run_task("gplt_runner_setup::setup_metrics_viewer", $nodes, instance_username => $username)
+  run_task("gplt_runner_setup::setup_gatling", $nodes, instance_username => $username)
 }

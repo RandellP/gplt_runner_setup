@@ -3,8 +3,8 @@
 # @summary Setup the software that is needed in all cases
 #
 # @example
-#   include p9_instance_setup::core
-class p9_instance_setup::core (
+#   include gplt_runner_setup::core
+class gplt_runner_setup::core (
   ) {
 
   include ntp
@@ -30,7 +30,7 @@ class p9_instance_setup::core (
   }
 
   #configure sudo class and ensure centos has passwordless sudo privledges
-  include p9_instance_setup::sudo
+  include gplt_runner_setup::sudo
 
   class { "tmux":
     ensure => true,

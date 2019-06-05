@@ -4,17 +4,17 @@
 #   instance_username - name of user to setup
 #
 #  examples:
-#    run_plan(p9_instance_setup::upload_auth_files,"nodes" => $nodes, instance_username => $username)
+#    run_plan(gplt_runner_setup::upload_auth_files,"nodes" => $nodes, instance_username => $username)
 #
-#    bolt plan run p9_instance_setup::upload_auth_files --nodes 10.234.0.19 --user centos 
+#    bolt plan run gplt_runner_setup::upload_auth_files --nodes 10.234.0.19 --user centos
 #      --private-key ~/.ssh/id_rsa-acceptance --no-host-key-check --tty --run-as root instance_username=betty
 #
-plan p9_instance_setup::upload_auth_files (
+plan gplt_runner_setup::upload_auth_files (
     TargetSpec $nodes,
     String $instance_username = "",
   ) {
 
-  $username = run_plan(p9_instance_setup::determine_username,"nodes" => "localhost",
+  $username = run_plan(gplt_runner_setup::determine_username,"nodes" => "localhost",
     instance_username => $instance_username)
   notice("Username will be ${username}")
 
@@ -25,7 +25,7 @@ plan p9_instance_setup::upload_auth_files (
   $fog_file_src = "${home_dir}/.fog"
   $fog_file_dest = "/home/${username}/.fog"
   # readable is a copy of a function in bolt 1.21 and later.  Can switch when we move to the latest bolt
-  if p9_instance_setup::readable($fog_file_src) {
+  if gplt_runner_setup::readable($fog_file_src) {
     upload_file($fog_file_src,$fog_file_dest,$nodes,"_run_as" => $username)
   }
 
@@ -33,7 +33,7 @@ plan p9_instance_setup::upload_auth_files (
   $aws_cred_file_src = "${home_dir}/.aws/credentials"
   $aws_cred_file_dest = "/home/${username}/.aws/credentials"
   # readable is a copy of a function in bolt 1.21 and later.  Can switch when we move to the latest bolt
-  if p9_instance_setup::readable($aws_cred_file_src) {
+  if gplt_runner_setup::readable($aws_cred_file_src) {
     run_command("mkdir -p /home/${username}/.aws",$nodes,"_run_as" => $username)
     upload_file($aws_cred_file_src,$aws_cred_file_dest,$nodes,"_run_as" => $username)
   }
@@ -42,7 +42,7 @@ plan p9_instance_setup::upload_auth_files (
   $ssh_src = "${home_dir}/.ssh"
   $ssh_dest = "/home/${username}/ssh_temp"
   # readable is a copy of a function in bolt 1.21 and later.  Can switch when we move to the latest bolt
-  if p9_instance_setup::readable($ssh_src) {
+  if gplt_runner_setup::readable($ssh_src) {
     run_command("rm -rf ${ssh_dest}",$nodes)
     upload_file($ssh_src,$ssh_dest,$nodes,"_run_as" => $username)
     run_command("bash -c \"cp -rp ${ssh_dest}/* /home/${username}/.ssh/\"",$nodes,"_run_as" => $username)

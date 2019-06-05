@@ -5,17 +5,17 @@
 # @summary Classification entry point
 #
 # @example
-#   include p9_instance_setup
-class p9_instance_setup (
+#   include gplt_runner_setup
+class gplt_runner_setup (
   String $test_user = "tester",
   Boolean $set_zsh = true,
   ) {
 
-  create_resources( "p9_instance_setup::core" )
-  create_resources( "p9_instance_setup::user_setup", $test_user)
+  create_resources( "gplt_runner_setup::core" )
+  create_resources( "gplt_runner_setup::user_setup", $test_user)
   if $set_zsh {
-    create_resources( "p9_instance_setup::ohmyzsh", $test_user)
+    create_resources( "gplt_runner_setup::ohmyzsh", $test_user)
   }
-  create_resources( "p9_instance_setup::dashboard")
+  create_resources( "gplt_runner_setup::dashboard")
 
 }
