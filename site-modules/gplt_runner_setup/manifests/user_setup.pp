@@ -19,6 +19,12 @@ class gplt_runner_setup::user_setup (
     managehome       => true,
   }
 
+  file { "${test_user} home":
+    ensure => "directory",
+    path   => "/home/${test_user}",
+    mode   => "755",
+  }
+
   file { "${test_user} ssh":
     ensure  => "directory",
     path    => "/home/${test_user}/.ssh",
@@ -49,6 +55,12 @@ class gplt_runner_setup::user_setup (
     path   => "/home/${test_user}/gatling",
     owner  => $test_user,
     group  => $test_user,
+  }
+
+  file { "${test_user} html users link":
+    ensure => "link",
+    path   => "/usr/share/nginx/html/users/${test_user}",
+    target => "/home/${test_user}/gatling"
   }
 
   include gplt_runner_setup::sudo
