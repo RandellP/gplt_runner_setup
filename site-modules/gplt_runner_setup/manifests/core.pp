@@ -38,8 +38,8 @@ class gplt_runner_setup::core (
 
   class { "rbenv": }
   rbenv::plugin { [ "rbenv/rbenv-vars", "rbenv/ruby-build" ]: }
-  rbenv::build { "2.3.0": global => true }
-  rbenv::gem { "beaker": ruby_version => "2.3.0" }
+  rbenv::build { "2.5.1": global => true }
+  rbenv::gem { "beaker": ruby_version => "2.5.1" }
 
   # one small piece of gplt uses keystore from here.  Hopefully we can ditch that sometime in the future.
   class { "java" :
