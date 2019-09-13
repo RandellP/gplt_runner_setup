@@ -75,7 +75,7 @@ class gplt_runner_setup::core (
   }
 
   package { "puppet-bolt":
-    ensure => "1.15.0-1.el7",
+    ensure => "present",
   }
 
   exec { "pip":
