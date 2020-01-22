@@ -37,6 +37,13 @@ plan gplt_runner_setup::upload_auth_files (
     run_command("mkdir -p /home/${username}/.aws",$nodes,"_run_as" => $username)
     upload_file($aws_cred_file_src,$aws_cred_file_dest,$nodes,"_run_as" => $username)
   }
+  $aws_config_file_src = "${home_dir}/.aws/config"
+  $aws_config_file_dest = "/home/${username}/.aws/config"
+  # readable is a copy of a function in bolt 1.21 and later.  Can switch when we move to the latest bolt
+  if gplt_runner_setup::readable($aws_config_file_src) {
+    run_command("mkdir -p /home/${username}/.aws",$nodes,"_run_as" => $username)
+    upload_file($aws_config_file_src,$aws_config_file_dest,$nodes,"_run_as" => $username)
+  }
 
   #private a public keys needed to login to vmpooler, aws, and other p9 instances
   $ssh_src = "${home_dir}/.ssh"
