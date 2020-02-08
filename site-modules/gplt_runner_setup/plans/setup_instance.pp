@@ -6,7 +6,7 @@
 #   upload_user_files - If true will attempt to upload common user configuration files
 #
 # examples:
-#   bolt task run gplt_runner_setup::setup_metrics_viewer --nodes 10.234.0.19 --user centos
+#   bolt plan run gplt_runner_setup::setup_instance --nodes 10.234.0.19 --user centos
 #   --private-key ~/.ssh/id_rsa-acceptance --no-host-key-check --tty --run-as root instance_username=fanny
 #
 plan gplt_runner_setup::setup_instance (
