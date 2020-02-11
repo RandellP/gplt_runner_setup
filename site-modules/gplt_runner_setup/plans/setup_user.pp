@@ -52,6 +52,6 @@ plan gplt_runner_setup::setup_user (
 
   #do not try to use _run_as => $username...  For some reason it claims it works but doesn't.
   #the tasks chown and chgrp anyway
-  run_task("gplt_runner_setup::setup_metrics_viewer", $nodes, instance_username => $username)
+  run_task("gplt_runner_setup::setup_metrics_collector", $nodes, instance_username => $username)
   run_task("gplt_runner_setup::setup_gatling", $nodes, instance_username => $username)
 }
